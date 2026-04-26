@@ -1,10 +1,16 @@
 from fastapi import FastAPI
-from routes.generate import router as generate_router
+from utils.video import create_video
 
-app = FastAPI(title="AI Video SaaS")
-
-app.include_router(generate_router, prefix="/api")
+app = FastAPI()
 
 @app.get("/")
 def home():
     return {"message": "AI Video SaaS Running"}
+
+@app.post("/generate-video")
+def generate_video(text: str):
+    path = create_video(text)
+    return {
+        "status": "success",
+        "video_path": path
+    }
