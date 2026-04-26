@@ -5,10 +5,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 
 def create_video(text: str, filename="video.mp4"):
+    print("🔥 create_video() STARTED")
+
+def create_video(text: str, filename="video.mp4"):
     # ✅ ensure output folder exists
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     output_path = os.path.join(OUTPUT_DIR, filename)
+
+    output_path = os.path.join(OUTPUT_DIR, filename)
+
+    print("📁 OUTPUT PATH:", output_path)
+print("📂 OUTPUT DIR EXISTS:", os.path.exists(OUTPUT_DIR))
 
     # 🟢 background
     bg = ColorClip(size=(1080, 1080), color=(0, 0, 0), duration=5)
