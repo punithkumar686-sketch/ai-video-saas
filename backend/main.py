@@ -1,16 +1,17 @@
 from fastapi import FastAPI
-from utils.video import create_video
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# CORS setup (must be right after app creation)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def home():
     return {"message": "AI Video SaaS Running"}
-
-@app.post("/generate-video")
-def generate_video(text: str):
-    path = create_video(text)
-    return {
-        "status": "success",
-        "video_path": path
-    }
