@@ -1,13 +1,24 @@
-from fastapi import FastAPI
-from utils.video import create_video
+import os
+from moviepy.editor import ColorClip
 
-app = FastAPI()
+def create_video(text: str, filename="video.mp4"):
+    print("🔥 create_video() STARTED")
 
-@app.get("/")
-def home():
-    return {"message": "AI Video SaaS Running"}
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    output_dir = os.path.join(base_dir, "output")
 
-@app.post("/generate-video")
-def generate_video(text: str):
-    path = create_video(text)
-    return {"status": "success", "video_path": path}
+    os.makedirs(output_dir, exist_ok=True)
+
+    output_path = os.path.join(output_dir, filename)
+
+    print("📁 Saving to:", output_path)
+
+    clip = ColorClip(size=(1080, 1080), color=(255, 0, 0), duration=3)
+
+    clip.write_videofile(output_path, fps=24)
+
+    clip.close()
+
+    print("✅ VIDEO CREATED SUCCESSFULLY")
+
+    return output_path
