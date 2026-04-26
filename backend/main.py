@@ -10,8 +10,4 @@ def home():
 @app.post("/generate-video")
 def generate_video(text: str):
     path = create_video(text)
-
-    return {
-        "status": "success",
-        "video_path": path
-    }
+    return {"status": "success", "video_path": path}
