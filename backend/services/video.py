@@ -1,4 +1,4 @@
-from moviepy.editor import *
+from moviepy import VideoFileClip, TextClip, CompositeVideoClip
 import os
 
 def create_video(script_text, audio_path, output_path="outputs/video.mp4"):
